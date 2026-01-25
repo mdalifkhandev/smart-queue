@@ -32,7 +32,7 @@ export const Select = ({
             key={idx}
             value={opt.value}
             disabled={opt.disabled}
-            className="bg-white dark:bg-slate-800"
+            className={`bg-white dark:bg-slate-800 ${opt.className || ""}`}
           >
             {opt.label}
           </option>

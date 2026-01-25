@@ -69,11 +69,18 @@ export const AppointmentModal = ({
                 }
                 options={[
                   { value: "", label: "Auto-Queue / No Staff" },
-                  ...staff.map((s) => ({
-                    value: s._id,
-                    label: `${s.name} (${s.currentLoad ?? 0}/${s.dailyCapacity})`,
-                    disabled: s.availabilityStatus === "On Leave",
-                  })),
+                  ...staff.map((s) => {
+                    const currentLoad = s.currentLoad ?? 0;
+                    const isFull = currentLoad >= s.dailyCapacity;
+                    return {
+                      value: s._id,
+                      label: `${s.name} (${currentLoad}/${s.dailyCapacity})`,
+                      disabled: s.availabilityStatus === "On Leave" || isFull,
+                      className: isFull
+                        ? "bg-red-100 text-red-600 dark:bg-red-900/30"
+                        : "",
+                    };
+                  }),
                 ]}
               />
             </div>
