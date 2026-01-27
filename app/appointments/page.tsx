@@ -45,7 +45,7 @@ export default function AppointmentPage() {
         api.get(
           `/appointments?date=${filterDate}${filterStaff ? `&staffId=${filterStaff}` : ""}`,
         ),
-        api.get("/staff"),
+        api.get(`/staff?date=${filterDate}`),
         api.get("/services"),
       ]);
       setAppointments(appRes.data);
